@@ -183,7 +183,7 @@ class Disk:
         "http://example.com/tilestache.cfg", the path *must* be an unambiguous
         filesystem path, e.g. "file:///tmp/cache"
     """
-    def __init__(self, path, umask=0022, dirs='safe', gzip='txt text json xml'.split()):
+    def __init__(self, path, umask=0o022, dirs='safe', gzip='txt text json xml'.split()):
         self.cachepath = path
         self.umask = int(umask)
         self.dirs = dirs
@@ -271,7 +271,7 @@ class Disk:
                         # Oh - no they didn't.
                         pass
                 
-                os.makedirs(lockpath, 0777&~self.umask)
+                os.makedirs(lockpath, 0o777&~self.umask)
                 break
             except OSError as e:
                 if e.errno != 17:
@@ -332,7 +332,7 @@ class Disk:
         
         try:
             umask_old = os.umask(self.umask)
-            os.makedirs(dirname(fullpath), 0777&~self.umask)
+            os.makedirs(dirname(fullpath), 0o777&~self.umask)
         except OSError as e:
             if e.errno != 17:
                 raise
@@ -359,7 +359,7 @@ class Disk:
             os.unlink(fullpath)
             os.rename(tmp_path, fullpath)
 
-        os.chmod(fullpath, 0666&~self.umask)
+        os.chmod(fullpath, 0o666&~self.umask)
 
 class Multi:
     """ Caches tiles to multiple, ordered caches.
