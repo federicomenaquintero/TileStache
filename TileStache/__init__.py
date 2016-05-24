@@ -19,7 +19,7 @@ try:
     from urlparse import parse_qs
 except ImportError:
     from cgi import parse_qs
-from StringIO import StringIO
+from io import StringIO
 from os.path import dirname, join as pathjoin, realpath
 from datetime import datetime, timedelta
 from urlparse import urljoin, urlparse

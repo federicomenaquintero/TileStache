@@ -68,7 +68,7 @@ from tempfile import mkstemp
 from subprocess import Popen, PIPE
 from httplib import HTTPConnection
 from os.path import basename, join
-from StringIO import StringIO
+from io import BytesIO
 from datetime import datetime
 from urlparse import urlparse
 from base64 import b16encode
@@ -229,12 +229,12 @@ class ConfirmationResponse:
         else:
             bytes, color = _thumbs_down_bytes, _thumbs_down_color
         
-        thumb = Image.open(StringIO(bytes))
+        thumb = Image.open(BytesIO(bytes))
         image = Image.new('RGB', (256, 256), color)
         image.paste(thumb.resize((128, 128)), (64, 80))
         
         mapnik_url = 'http://tile.openstreetmap.org/%(zoom)d/%(column)d/%(row)d.png' % self.coord.__dict__
-        mapnik_img = Image.open(StringIO(urlopen(mapnik_url).read()))
+        mapnik_img = Image.open(BytesIO(urlopen(mapnik_url).read()))
         mapnik_img = mapnik_img.convert('L').convert('RGB')
         image = Image.blend(image, mapnik_img, .15)
         

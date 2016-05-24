@@ -118,7 +118,7 @@ A complete example configuration might look like this:
     }
 """
 from re import search
-from StringIO import StringIO
+from io import BytesIO
 from itertools import product
 from urlparse import urljoin
 from urllib import urlopen
@@ -258,7 +258,7 @@ def local_bitmap(source, config, coord, dim):
     """
     address = urljoin(config.dirpath, source)
     bytes = urlopen(address).read()
-    image = Image.open(StringIO(bytes)).convert('RGBA')
+    image = Image.open(BytesIO(bytes)).convert('RGBA')
     
     coord = coord.zoomBy(8)
     w, h, col, row = image.size[0], image.size[1], int(coord.column), int(coord.row)
@@ -289,7 +289,7 @@ def layer_bitmap(layer, coord):
     from . import getTile
 
     mime, body = getTile(layer, coord, 'png')
-    image = Image.open(StringIO(body)).convert('RGBA')
+    image = Image.open(BytesIO(body)).convert('RGBA')
 
     return Blit.Bitmap(image)
 

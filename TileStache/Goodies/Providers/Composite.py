@@ -154,7 +154,7 @@ from urllib import urlopen
 from urlparse import urljoin
 from os.path import join as pathjoin
 from xml.dom.minidom import parse as parseXML
-from StringIO import StringIO
+from io import BytesIO
 
 try:
     from json import loads as jsonload
@@ -315,7 +315,7 @@ class Layer:
         if self.layername:
             layer = config.layers[self.layername]
             mime, body = TileStache.getTile(layer, coord, 'png')
-            layer_img = Image.open(StringIO(body)).convert('RGBA')
+            layer_img = Image.open(BytesIO(body)).convert('RGBA')
             layer_rgba = _img2rgba(layer_img)
 
             has_layer = True
@@ -323,7 +323,7 @@ class Layer:
         if self.maskname:
             layer = config.layers[self.maskname]
             mime, body = TileStache.getTile(layer, coord, 'png')
-            mask_img = Image.open(StringIO(body)).convert('L')
+            mask_img = Image.open(BytesIO(body)).convert('L')
             mask_chan = _img2arr(mask_img).astype(numpy.float32) / 255.
 
             has_mask = True

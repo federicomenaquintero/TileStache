@@ -23,7 +23,7 @@
 from urlparse import parse_qsl
 from datetime import timedelta
 from datetime import datetime
-from StringIO import StringIO
+from io import BytesIO
 
 from TileStache import WSGITileServer
 from TileStache.Core import KnownUnknown
@@ -68,7 +68,7 @@ class WSGIServer (WSGITileServer):
             # some providers. TODO: add optional support for these two parameters.
             #
             
-            output = StringIO()
+            output = BytesIO()
             image = provider.renderArea(width, height, None, xmin, ymin, xmax, ymax, None)
             image.save(output, format='PNG')
             

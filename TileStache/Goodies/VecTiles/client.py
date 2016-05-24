@@ -34,7 +34,7 @@ from math import pi, log as _log
 from threading import Thread, Lock as _Lock
 from httplib import HTTPConnection
 from itertools import product
-from StringIO import StringIO
+from io import BytesIO
 from urlparse import urlparse
 from gzip import GzipFile
 
@@ -129,7 +129,7 @@ def load_tile_features(lock, host, port, path_fmt, tiles, features):
 
         conn.request('GET', path, headers=head)
         resp = conn.getresponse()
-        file = StringIO(resp.read())
+        file = BytesIO(resp.read())
         
         if resp.getheader('Content-Encoding') == 'gzip':
             file = GzipFile(fileobj=file, mode='r')

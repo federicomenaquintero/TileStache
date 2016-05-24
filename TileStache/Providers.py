@@ -73,7 +73,7 @@ For an example of a non-image provider, see TileStache.Vector.Provider.
 import os
 import logging
 
-from StringIO import StringIO
+from io import BytesIO
 from string import Template
 import urllib2
 import urllib
@@ -140,7 +140,7 @@ class Verbatim:
     ''' Wrapper for PIL.Image that saves raw input bytes if modes and formats match.
     '''
     def __init__(self, bytes):
-        self.buffer = StringIO(bytes)
+        self.buffer = BytesIO(bytes)
         self.format = None
         self._image = None
         
