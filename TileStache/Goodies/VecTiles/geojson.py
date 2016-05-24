@@ -42,9 +42,10 @@ def get_tiles(names, config, coord):
     
     return geojsons
 
-def mercator((x, y)):
+def mercator(pair):
     ''' Project an (x, y) tuple to spherical mercator.
     '''
+    x, y = pair
     x, y = pi * x/180, pi * y/180
     y = log(tan(0.25 * pi + 0.5 * y))
     return 6378137 * x, 6378137 * y

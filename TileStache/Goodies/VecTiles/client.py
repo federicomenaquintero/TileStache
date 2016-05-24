@@ -259,7 +259,7 @@ class Datasource (PythonDatasource):
             
         if self.sort:
             logging.debug('Sorting by %s %s' % (self.sort, 'descending' if self.reverse else 'ascending'))
-            key_func = lambda (wkb, props): props.get(self.sort, None)
+            key_func = lambda wkb_props: wkb_props[1].get(self.sort, None)
             features.sort(reverse=self.reverse, key=key_func)
         
         if len(features) == 0:
