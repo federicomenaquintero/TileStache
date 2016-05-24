@@ -188,7 +188,7 @@ if __name__ == '__main__':
                         "total": count}
     
             if options.verbose:
-                print >> stderr, '%(offset)d of %(total)d...' % progress,
+                print('%(offset)d of %(total)d...' % progress, end="", file=stderr)
     
             try:
                 mimetype, format = layer.getTypeByExtension(extension)
@@ -203,7 +203,7 @@ if __name__ == '__main__':
                 config.cache.remove(layer, coord, format)
     
             if options.verbose:
-                print >> stderr, '%(tile)s' % progress
+                print('%(tile)s' % progress, file=stderr)
                     
             if progressfile:
                 fp = open(progressfile, 'w')

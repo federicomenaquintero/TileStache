@@ -335,7 +335,7 @@ if __name__ == '__main__':
         
         while not rendered:
             if options.verbose:
-                print >> stderr, '%(offset)d of %(total)d...' % progress,
+                print('%(offset)d of %(total)d...' % progress, end="", file=stderr)
     
             try:
                 mimetype, content = getTile(layer, coord, extension, options.ignore_cached)
@@ -346,10 +346,10 @@ if __name__ == '__main__':
                     js_size = len(js_body) / 1024
                     
                     layer.config.cache.save(js_body, layer, coord, 'JS')
-                    print >> stderr, '%s (%dKB)' % (js_path, js_size),
+                    print('%s (%dKB)' % (js_path, js_size), end="", file=stderr)
             
                 elif options.callback:
-                    print >> stderr, '(callback ignored)',
+                    print('(callback ignored)', end="", file=stderr)
             
             except:
                 #
@@ -358,7 +358,7 @@ if __name__ == '__main__':
                 attempts -= 1
 
                 if options.verbose:
-                    print >> stderr, 'Failed %s, will try %s more.' % (progress['tile'], ['no', 'once', 'twice'][attempts])
+                    print('Failed %s, will try %s more.' % (progress['tile'], ['no', 'once', 'twice'][attempts]), file=stderr)
                 
                 if attempts == 0:
                     if not error_list:
@@ -377,7 +377,7 @@ if __name__ == '__main__':
                 progress['size'] = '%dKB' % (len(content) / 1024)
         
                 if options.verbose:
-                    print >> stderr, '%(tile)s (%(size)s)' % progress
+                    print('%(tile)s (%(size)s)' % progress, file=stderr)
                 
         if options.progressfile:
             fp = open(options.progressfile, 'w')

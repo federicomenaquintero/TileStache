@@ -308,7 +308,7 @@ class VectorProviderTest(PostGISVectorTestBase, TestCase):
         topojson_result = json.loads(tile_content)
 
         self.assertTrue(tile_mimetype.endswith('/json'))
-        print topojson_result
+        print(topojson_result)
         self.assertEqual(topojson_result['type'], 'Topology')
         self.assertEqual(len(topojson_result['objects']['vectile']['geometries']), 2)
 
@@ -327,7 +327,7 @@ class VectorProviderTest(PostGISVectorTestBase, TestCase):
 
             elif feature['properties']['name'] == 'Lima':
                 cities.append(feature['properties']['name'])
-                print feature['coordinates']
+                print(feature['coordinates'])
                 self.assertTrue(hypot(point_lima.x - lon, point_lima.y - lat) < 1)
 
         self.assertTrue('San Francisco' in cities)

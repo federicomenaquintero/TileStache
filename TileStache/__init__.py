@@ -268,10 +268,10 @@ def requestHandler2(config_hint, path_info, query_string=None, script_name=''):
     except Core.KnownUnknown as e:
         out = StringIO()
         
-        print >> out, 'Known unknown!'
-        print >> out, e
-        print >> out, ''
-        print >> out, '\n'.join(Core._rummy())
+        print('Known unknown!', file=out)
+        print(e, file=out)
+        print('', file=out)
+        print('\n'.join(Core._rummy()), file=out)
         
         headers['Content-Type'] = 'text/plain'
         status_code, content = 500, out.getvalue()
@@ -341,7 +341,7 @@ class WSGITileServer:
             try:
                 self.config = parseConfigfile(config)
             except:
-                print "Error loading Tilestache config:"
+                print("Error loading Tilestache config:")
                 raise
 
         else:

@@ -750,7 +750,7 @@ def makeLayer(element):
             if child.tagName == 'mask' and child.hasAttribute('src'):
                 kwargs['maskname'] = child.getAttribute('src')
 
-    print >> sys.stderr, 'Making a layer from', kwargs
+    print(('Making a layer from', kwargs), file=sys.stderr)
     
     return Layer(**kwargs)
 
@@ -772,7 +772,7 @@ def makeStack(element):
             else:
                 raise Exception('Unknown element "%s"' % child.tagName)
 
-    print >> sys.stderr, 'Making a stack with %d layers' % len(layers)
+    print('Making a stack with %d layers' % len(layers), file=sys.stderr)
 
     return Stack(layers)
 
