@@ -382,7 +382,7 @@ class Layer:
             # Start by checking for a tile in the cache.
             try:
                 body = cache.read(self, coord, format)
-            except TheTileLeftANote, e:
+            except TheTileLeftANote as e:
                 headers = e.headers
                 status_code = e.status_code
                 body = e.content
@@ -422,7 +422,7 @@ class Layer:
                     try:
                         tile = self.render(coord, format)
                         save = True
-                    except NoTileLeftBehind, e:
+                    except NoTileLeftBehind as e:
                         tile = e.tile
                         save = False
                         status_code = 404
@@ -445,7 +445,7 @@ class Layer:
 
                     tile_from = 'layer.render()'
 
-            except TheTileLeftANote, e:
+            except TheTileLeftANote as e:
                 headers = e.headers
                 status_code = e.status_code
                 body = e.content

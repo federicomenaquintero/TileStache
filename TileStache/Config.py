@@ -489,7 +489,7 @@ def loadClassPath(classpath):
             if _class is None:
                 raise Exception('eval(%(objname)s) in %(modname)s came up None' % locals())
 
-        except Exception, e:
+        except Exception as e:
             raise Core.KnownUnknown('Tried to import %s, but: %s' % (classpath, e))
     
     else:
@@ -500,12 +500,12 @@ def loadClassPath(classpath):
     
         try:
             module = __import__('.'.join(classpath[:-1]), fromlist=str(classpath[-1]))
-        except ImportError, e:
+        except ImportError as e:
             raise Core.KnownUnknown('Tried to import %s, but: %s' % ('.'.join(classpath), e))
     
         try:
             _class = getattr(module, classpath[-1])
-        except AttributeError, e:
+        except AttributeError as e:
             raise Core.KnownUnknown('Tried to import %s, but: %s' % ('.'.join(classpath), e))
 
     return _class

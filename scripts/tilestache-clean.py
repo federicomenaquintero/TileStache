@@ -167,7 +167,7 @@ if __name__ == '__main__':
         padding = options.padding
         tile_list = options.tile_list
 
-    except KnownUnknown, e:
+    except KnownUnknown as e:
         parser.error(str(e))
 
     for layer in layers:

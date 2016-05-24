@@ -273,7 +273,7 @@ class Disk:
                 
                 os.makedirs(lockpath, 0777&~self.umask)
                 break
-            except OSError, e:
+            except OSError as e:
                 if e.errno != 17:
                     raise
                 time.sleep(.2)
@@ -300,7 +300,7 @@ class Disk:
         
         try:
             os.remove(fullpath)
-        except OSError, e:
+        except OSError as e:
             # errno=2 means that the file does not exist, which is fine
             if e.errno != 2:
                 raise
@@ -333,7 +333,7 @@ class Disk:
         try:
             umask_old = os.umask(self.umask)
             os.makedirs(dirname(fullpath), 0777&~self.umask)
-        except OSError, e:
+        except OSError as e:
             if e.errno != 17:
                 raise
         finally:

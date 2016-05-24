@@ -309,7 +309,7 @@ if __name__ == '__main__':
         tile_list = options.tile_list
         error_list = options.error_list
 
-    except KnownUnknown, e:
+    except KnownUnknown as e:
         parser.error(str(e))
 
     if tile_list:

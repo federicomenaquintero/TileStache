@@ -265,7 +265,7 @@ def requestHandler2(config_hint, path_info, query_string=None, script_name=''):
             headers.setdefault('Expires', expires.strftime('%a %d %b %Y %H:%M:%S GMT'))
             headers.setdefault('Cache-Control', 'public, max-age=%d' % layer.max_cache_age)
 
-    except Core.KnownUnknown, e:
+    except Core.KnownUnknown as e:
         out = StringIO()
         
         print >> out, 'Known unknown!'
@@ -359,12 +359,12 @@ class WSGITileServer:
         if self.autoreload: # re-parse the config file on every request
             try:
                 self.config = parseConfigfile(self.config_path)
-            except Exception, e:
+            except Exception as e:
                 raise Core.KnownUnknown("Error loading Tilestache config file:\n%s" % str(e))
 
         try:
             layer, coord, ext = splitPathInfo(environ['PATH_INFO'])
-        except Core.KnownUnknown, e:
+        except Core.KnownUnknown as e:
             return self._response(start_response, 400, str(e))
 
         #

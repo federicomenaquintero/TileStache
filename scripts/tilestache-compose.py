@@ -204,7 +204,7 @@ if __name__ == '__main__':
         else:
             raise BadComposure("Error: not really sure what's going on.")
 
-    except BadComposure, e:
+    except BadComposure as e:
         print >> stderr, parser.usage
         print >> stderr, ''
         print >> stderr, '%s --help for possible options.' % __file__

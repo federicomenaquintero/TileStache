@@ -76,7 +76,7 @@ if __name__ == '__main__':
 
             coords.append(coord)
 
-    except KnownUnknown, e:
+    except KnownUnknown as e:
         parser.error(str(e))
     
     for coord in coords:

@@ -16,7 +16,7 @@ try:
     from psycopg2.extras import RealDictCursor
     from psycopg2 import connect
 
-except ImportError, err:
+except ImportError as  err:
     # Still possible to build the documentation without psycopg2
 
     def connect(*args, **kwargs):
